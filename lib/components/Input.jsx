@@ -1,5 +1,5 @@
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
-import React from "react";
+import React, { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 const inputSizeClasses = {
@@ -7,7 +7,7 @@ const inputSizeClasses = {
   small: "py-0 pr-5",
 };
 
-export function Input({
+let Input = forwardRef(function Input({
   value = undefined,
   defaultValue = undefined,
   label = null,
@@ -23,7 +23,7 @@ export function Input({
   inputHtmlProps = {},
   inputClassNames = "",
   size = "default",
-}) {
+}, ref) {
   return (
     <div className={twMerge("text-gray-600", rootClassNames)}>
       {label && (
@@ -36,6 +36,7 @@ export function Input({
       )}
       <div className="relative rounded-md">
         <input
+          ref={ref}
           type={type}
           name={name}
           id={id}
@@ -79,4 +80,5 @@ export function Input({
       </div>
     </div>
   );
-}
+})
+export { Input };
