@@ -1,6 +1,6 @@
 # Defog's UI components
 
-All actual files live inside `lib/`.
+All component source files live inside `lib/`.
 
 To "Test" this folder aka actually see your components, the stuff is inside `test/`
 
