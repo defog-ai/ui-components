@@ -15,8 +15,8 @@ let TextArea = forwardRef(function TextArea(
     placeholder = "Enter text here",
     id = "",
     name = "text-input",
-    onChange = (...args) => { },
-    onKeyDown = (...args) => { },
+    onChange = (...args) => {},
+    onKeyDown = (...args) => {},
     textAreaHtmlProps = {},
     autoResize = true,
   },
@@ -72,6 +72,6 @@ let TextArea = forwardRef(function TextArea(
       </div>
     </div>
   );
-})
+});
 
 export { TextArea };
