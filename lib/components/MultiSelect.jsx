@@ -61,10 +61,10 @@ export function MultiSelect({
     query === ""
       ? internalOptions
       : internalOptions.filter((option) => {
-        return (option.label + "")
-          .toLowerCase()
-          .includes(query.toLowerCase());
-      });
+          return (option.label + "")
+            .toLowerCase()
+            .includes(query.toLowerCase());
+        });
 
   // if there's no matching option
   // or if there's no exact match
@@ -177,11 +177,41 @@ export function MultiSelect({
       <div className="relative">
         <div
           className={twMerge(
-            "flex flex-row items-start w-full rounded-md border-0 pr-12 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-400 sm:text-sm sm:leading-6",
+            "max-w-96 flex flex-row flex-wrap gap-2 items-start w-full rounded-md border-0 pr-12 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-400 sm:text-sm sm:leading-6",
             inputSizeClasses[size] || inputSizeClasses["default"],
             disabled ? "bg-gray-100 text-gray-400" : "bg-white text-gray-900"
           )}
         >
+          {selectedOptions.map((opt) => {
+            return tagRenderer ? (
+              tagRenderer(opt)
+            ) : (
+              <div className="border border-gray-300 shadow-sm flex h-6 flex-row bg-gray-200 text-gray-500 items-center rounded-md cursor-default">
+                <span className="pl-2" key={opt.value}>
+                  {opt.value}
+                </span>
+                <div
+                  className="ml-2 w-4 rounded-r-md hover:bg-gray-400 hover:text-white h-full flex items-center justify-center cursor-pointer"
+                  onClick={() => {
+                    setSelectedOptions(
+                      selectedOptions.filter(
+                        (selectedOption) => selectedOption.value !== opt.value
+                      )
+                    );
+                    if (onChange && typeof onChange === "function") {
+                      onChange(
+                        selectedOptions.filter(
+                          (selectedOption) => selectedOption.value !== opt.value
+                        )
+                      );
+                    }
+                  }}
+                >
+                  <XMarkIcon className="w-3 h-3" />
+                </div>
+              </div>
+            );
+          })}
           <ComboboxInput
             ref={ref}
             className={
@@ -235,7 +265,7 @@ export function MultiSelect({
                   twMerge(
                     "relative cursor-default select-none",
                     popupOptionSizeClasses[size] ||
-                    popupOptionSizeClasses["default"],
+                      popupOptionSizeClasses["default"],
                     focus ? "bg-blue-400 text-white" : "text-gray-900"
                   )
                 }
@@ -274,38 +304,6 @@ export function MultiSelect({
             ))}
           </ComboboxOptions>
         )}
-      </div>
-      <div className="flex flex-row gap-1 flex-wrap mt-2">
-        {selectedOptions.map((opt) => {
-          return tagRenderer ? (
-            tagRenderer(opt)
-          ) : (
-            <div className="border border-gray-300 shadow-sm flex h-6 flex-row mr-1 bg-gray-200 text-gray-500 items-center rounded-md cursor-default">
-              <span className="pl-2" key={opt.value}>
-                {opt.value}
-              </span>
-              <div
-                className="ml-2 w-4 rounded-r-md hover:bg-gray-400 hover:text-white h-full flex items-center justify-center cursor-pointer"
-                onClick={() => {
-                  setSelectedOptions(
-                    selectedOptions.filter(
-                      (selectedOption) => selectedOption.value !== opt.value
-                    )
-                  );
-                  if (onChange && typeof onChange === "function") {
-                    onChange(
-                      selectedOptions.filter(
-                        (selectedOption) => selectedOption.value !== opt.value
-                      )
-                    );
-                  }
-                }}
-              >
-                <XMarkIcon className="w-3 h-3" />
-              </div>
-            </div>
-          );
-        })}
       </div>
     </Combobox>
   );
