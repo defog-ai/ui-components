@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "checkJs": true,
+    "paths": {
+      "$lib/*": ["./lib/*"],
+      "$utils/*": ["./lib/utils/*"]
+    },
+
+    "jsx": "react-jsx"
+  }
+}
