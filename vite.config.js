@@ -23,12 +23,6 @@ export default defineConfig({
     },
     manifest: true,
   },
-  resolve: {
-    alias: {
-      $lib: resolve(__dirname, "lib/"),
-      $utils: resolve(__dirname, "lib/utils/"),
-    },
-  },
   rollupOptions: {
     // make sure to externalize deps that shouldn't be bundled
     // into your library

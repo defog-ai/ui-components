@@ -22,7 +22,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 //   { name: 'Calendar', href: '#', current: false },
 // ]
 
-export default function NavBar({ items }) {
+export function NavBar({ items }) {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

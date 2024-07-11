@@ -1,4 +1,4 @@
-import { isNumber } from "$utils/utils";
+import { isNumber } from "../utils/utils";
 import {
   Combobox,
   ComboboxButton,
@@ -59,10 +59,10 @@ export function SingleSelect({
     query === ""
       ? internalOptions
       : internalOptions.filter((option) => {
-        return (option.label + "")
-          .toLowerCase()
-          .includes(query.toLowerCase());
-      });
+          return (option.label + "")
+            .toLowerCase()
+            .includes(query.toLowerCase());
+        });
 
   // if there's no matching option
   // or if there's no exact match
@@ -199,7 +199,7 @@ export function SingleSelect({
                   twMerge(
                     "relative cursor-default select-none",
                     popupOptionSizeClasses[size] ||
-                    popupOptionSizeClasses["default"],
+                      popupOptionSizeClasses["default"],
                     focus ? "bg-blue-400 text-white" : "text-gray-900"
                   )
                 }

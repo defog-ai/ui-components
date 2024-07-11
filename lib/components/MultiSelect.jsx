@@ -1,4 +1,4 @@
-import { isNumber } from "$utils/utils";
+import { isNumber } from "../utils/utils";
 import {
   Combobox,
   ComboboxButton,
