@@ -21,4 +21,4 @@ Test locally using the following commands in project root:
 
 Now you can go into `test/App.jsx` to see your components! Any changes you make to your code inside `lib/` will be reflected immediately.
 
-When done with improvements/edits, push to this repo and (maybe) notify others that they would need to run `git submodule update --init --recursive` in their repos in case they're using this code.
+When done with improvements/edits, push to this repo and (maybe) notify others that they would need to run `git pull` in their repos for this submodule.
