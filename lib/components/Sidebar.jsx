@@ -19,7 +19,7 @@ export function Sidebar({
   location = "left",
   open = null,
   disableClose = false,
-  onChange = (...args) => { },
+  onChange = (...args) => {},
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(disableClose ? true : open);
   const contentRef = useRef(null);
@@ -66,7 +66,7 @@ export function Sidebar({
         className="transition-all overflow-hidden grow"
       >
         <div
-          className={twMerge("content w-80 block", contentClassNames)}
+          className={twMerge("w-80 block", contentClassNames)}
           ref={contentRef}
         >
           {title ? <h2 className="mb-3 font-sans">{title}</h2> : <></>}
