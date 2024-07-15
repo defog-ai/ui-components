@@ -191,9 +191,9 @@ export function SingleSelect({
               popupClassName
             )}
           >
-            {filteredOptions.map((option) => (
+            {filteredOptions.map((option, i) => (
               <ComboboxOption
-                key={option.value}
+                key={option.value + "-" + i}
                 value={option}
                 className={({ focus }) =>
                   twMerge(

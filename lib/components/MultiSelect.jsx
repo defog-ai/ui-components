@@ -182,14 +182,15 @@ export function MultiSelect({
             disabled ? "bg-gray-100 text-gray-400" : "bg-white text-gray-900"
           )}
         >
-          {selectedOptions.map((opt) => {
+          {selectedOptions.map((opt, i) => {
             return tagRenderer ? (
               tagRenderer(opt)
             ) : (
-              <div className="border border-gray-300 shadow-sm flex h-6 flex-row bg-gray-200 text-gray-500 items-center rounded-md cursor-default">
-                <span className="pl-2" key={opt.value}>
-                  {opt.value}
-                </span>
+              <div
+                className="border border-gray-300 shadow-sm flex h-6 flex-row bg-gray-200 text-gray-500 items-center rounded-md cursor-default"
+                key={opt.value + "-" + i}
+              >
+                <span className="pl-2">{opt.value}</span>
                 <div
                   className="ml-2 w-4 rounded-r-md hover:bg-gray-400 hover:text-white h-full flex items-center justify-center cursor-pointer"
                   onClick={() => {
@@ -257,9 +258,9 @@ export function MultiSelect({
               popupClassName
             )}
           >
-            {filteredOptions.map((option) => (
+            {filteredOptions.map((option, i) => (
               <ComboboxOption
-                key={option.value}
+                key={option.value + "-" + i}
                 value={option}
                 className={({ focus }) =>
                   twMerge(
