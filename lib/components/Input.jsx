@@ -48,7 +48,7 @@ let Input = forwardRef(function Input(
             status !== "error"
               ? "focus:ring-blue-400"
               : "focus:ring-rose-400 ring-rose-400",
-            "sm:text-sm sm:leading-6",
+            "text-[16px] md:text-sm sm:leading-6",
             disabled
               ? "bg-gray-100 text-gray-400  focus:ring-gray-100 cursor-not-allowed"
               : "bg-white",
