@@ -9,19 +9,20 @@ export function Collapse({
   title,
   defaultCollapsed,
   collapsed,
+  alwaysOpen = false,
   rootClassNames = "",
   headerClassNames = "",
   iconClassNames = "",
   titleClassNames = "",
 }) {
   const [internalCollapsed, setInternalCollapsed] = useState(
-    defaultCollapsed || collapsed || false
+    alwaysOpen ? false : defaultCollapsed || collapsed || false
   );
   const ctr = useRef(null);
   const [haveHeight, setHaveHeight] = useState(false);
 
   useEffect(() => {
-    setInternalCollapsed(collapsed);
+    setInternalCollapsed(!alwaysOpen || collapsed);
   }, [collapsed]);
 
   function setHeight() {
@@ -54,7 +55,7 @@ export function Collapse({
     return () => {
       clearTimeout(timeout);
     };
-  }, [internalCollapsed]);
+  }, [internalCollapsed, children]);
 
   return (
     <>
@@ -66,7 +67,7 @@ export function Collapse({
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
-            setInternalCollapsed(!internalCollapsed);
+            setInternalCollapsed(!alwaysOpen || !internalCollapsed);
           }}
         >
           <ChevronRightIcon
