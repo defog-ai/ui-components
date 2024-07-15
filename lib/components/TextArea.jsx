@@ -40,7 +40,7 @@ let TextArea = forwardRef(function TextArea(
             placeholder={placeholder}
             onKeyDown={onKeyDown}
             className={twMerge(
-              "block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset",
+              "focus:outline-none pl-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset",
               "text-[16px] lg:text-sm leading-6",
               status !== "error"
                 ? "focus:ring-blue-400"

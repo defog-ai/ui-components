@@ -44,7 +44,7 @@ let Input = forwardRef(function Input(
           name={name}
           id={id}
           className={twMerge(
-            "block w-full shadow-sm rounded-md border-0 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset",
+            "focus:outline-none block w-full shadow-sm rounded-md border-0 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset",
             status !== "error"
               ? "focus:ring-blue-400"
               : "focus:ring-rose-400 ring-rose-400",
