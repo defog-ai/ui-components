@@ -22,7 +22,7 @@ export function Collapse({
   const [haveHeight, setHaveHeight] = useState(false);
 
   useEffect(() => {
-    setInternalCollapsed(!alwaysOpen || collapsed);
+    setInternalCollapsed(!alwaysOpen && collapsed);
   }, [collapsed]);
 
   function setHeight() {
@@ -67,7 +67,7 @@ export function Collapse({
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
-            setInternalCollapsed(!alwaysOpen || !internalCollapsed);
+            setInternalCollapsed(!alwaysOpen && !internalCollapsed);
           }}
         >
           <ChevronRightIcon
