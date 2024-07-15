@@ -93,7 +93,7 @@ const icons = {
   error: <XCircleIcon className="text-rose-500 w-4 h-4" />,
 };
 
-export function MessageMonitor({ disabled = false }) {
+export function MessageMonitor({ disabled = false, rootClassNames = "" }) {
   const messageManager = useContext(MessageManagerContext);
 
   const messages = useSyncExternalStore(
@@ -103,22 +103,30 @@ export function MessageMonitor({ disabled = false }) {
   );
 
   return (
-    <div className="fixed flex flex-col items-center w-full top-0 justify-center pt-4 z-[2000] *:transition-all pointer-events-none">
-      {!disabled &&
-        messages.map((message, i) => (
-          <div
-            key={message.time}
-            className={twMerge(
-              `my-2 flex flex-row gap-2 items-center max-w-[80%] p-2 shadow-md bg-white text-gray-800 mx-auto rounded-lg max-w-10/12 border animate-fade-in-down`,
-              message.type === "success" && "border-lime-500",
-              message.type === "warning" && "border-yellow-400",
-              message.type === "error" && "border-rose-500"
-            )}
-          >
-            <span>{icons[message.type]}</span>
-            <span className="grow">{message.message}</span>
-          </div>
-        ))}
-    </div>
+    <>
+      {!disabled && (
+        <div
+          className={twMerge(
+            "fixed flex flex-col items-center w-full top-0 justify-center pt-4 z-[2000] *:transition-all pointer-events-none",
+            rootClassNames
+          )}
+        >
+          {messages.map((message, i) => (
+            <div
+              key={message.time}
+              className={twMerge(
+                `my-2 flex flex-row gap-2 items-center max-w-[80%] p-2 shadow-md bg-white text-gray-800 mx-auto rounded-lg max-w-10/12 border animate-fade-in-down`,
+                message.type === "success" && "border-lime-500",
+                message.type === "warning" && "border-yellow-400",
+                message.type === "error" && "border-rose-500"
+              )}
+            >
+              <span>{icons[message.type]}</span>
+              <span className="grow">{message.message}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
