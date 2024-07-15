@@ -7,22 +7,32 @@ let timeout,
 export function Collapse({
   children,
   title,
+  defaultCollapsed,
+  collapsed,
   rootClassNames = "",
   headerClassNames = "",
+  iconClassNames = "",
+  titleClassNames = "",
 }) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [internalCollapsed, setInternalCollapsed] = useState(
+    defaultCollapsed || collapsed || false
+  );
   const ctr = useRef(null);
   const [haveHeight, setHaveHeight] = useState(false);
+
+  useEffect(() => {
+    setInternalCollapsed(collapsed);
+  }, [collapsed]);
 
   function setHeight() {
     if (count > 10) return;
 
     if (ctr.current) {
-      const contentCtr = ctr.current.querySelector(".content");
+      const contentCtr = ctr.current.querySelector(".collapse-content");
       if (contentCtr) {
         if (contentCtr.offsetHeight > 0) {
           setHaveHeight(true);
-          ctr.current.style.maxHeight = !collapsed
+          ctr.current.style.maxHeight = !internalCollapsed
             ? `${contentCtr.offsetHeight}px`
             : "0px";
         } else {
@@ -44,34 +54,33 @@ export function Collapse({
     return () => {
       clearTimeout(timeout);
     };
-  }, [collapsed]);
+  }, [internalCollapsed]);
 
   return (
     <>
       <div
-        className={twMerge(
-          "flex flex-col max-h-96 mb-2 pointer-events-auto cursor-pointer",
-          rootClassNames
-        )}
+        className={twMerge("max-h-96 mb-2 pointer-events-auto", rootClassNames)}
       >
         <div
-          className={twMerge("h-10 flex items-center", headerClassNames)}
+          className={twMerge("h-10 w-full cursor-pointer", headerClassNames)}
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
-            setCollapsed(!collapsed);
+            setInternalCollapsed(!internalCollapsed);
           }}
         >
           <ChevronRightIcon
-            className="w-4 h-4 inline fill-gray-500"
+            className={twMerge("w-4 h-4 inline fill-gray-500", iconClassNames)}
             style={{
               transition: "transform 0.3s ease-in-out",
               marginRight: "3px",
               top: "1px",
-              transform: collapsed ? "rotate(0deg)" : "rotate(90deg)",
+              transform: internalCollapsed ? "rotate(0deg)" : "rotate(90deg)",
             }}
           />
-          <span className="font-bold text-md">{title}</span>
+          <span className={twMerge("font-bold text-md", titleClassNames)}>
+            {title}
+          </span>
         </div>
         <div
           ref={ctr}
@@ -81,7 +90,7 @@ export function Collapse({
             transition: "max-height 0.6s ease-in-out",
           }}
         >
-          <div className="content">{children}</div>
+          <div className="collapse-content">{children}</div>
         </div>
       </div>
     </>
