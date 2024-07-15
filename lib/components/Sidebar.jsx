@@ -2,7 +2,6 @@
 import {
   ArrowLeftStartOnRectangleIcon,
   ArrowRightStartOnRectangleIcon,
-  QueueListIcon,
 } from "@heroicons/react/20/solid";
 import React, { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";

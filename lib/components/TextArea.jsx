@@ -41,7 +41,7 @@ let TextArea = forwardRef(function TextArea(
             onKeyDown={onKeyDown}
             className={twMerge(
               "block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset",
-              "text-[16px] md:text-sm leading-6",
+              "text-[16px] lg:text-sm leading-6",
               status !== "error"
                 ? "focus:ring-blue-400"
                 : "focus:ring-rose-400 ring-rose-400",
