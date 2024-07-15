@@ -107,7 +107,7 @@ export function MessageMonitor({ disabled = false, rootClassNames = "" }) {
       {!disabled && (
         <div
           className={twMerge(
-            "fixed flex flex-col items-center w-full top-0 justify-center pt-4 z-[2000] *:transition-all pointer-events-none",
+            "fixed flex flex-col items-center w-full top-0 justify-center pt-4 z-[10] *:transition-all pointer-events-none",
             rootClassNames
           )}
         >

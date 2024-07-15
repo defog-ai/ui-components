@@ -7,23 +7,26 @@ const inputSizeClasses = {
   small: "py-0 pr-5",
 };
 
-let Input = forwardRef(function Input({
-  value = undefined,
-  defaultValue = undefined,
-  label = null,
-  type = "text",
-  status = null,
-  disabled = false,
-  rootClassNames = "",
-  placeholder = "Enter text here",
-  id = "",
-  name = "text-input",
-  onChange = (...args) => { },
-  onPressEnter = (...args) => { },
-  inputHtmlProps = {},
-  inputClassNames = "",
-  size = "default",
-}, ref) {
+let Input = forwardRef(function Input(
+  {
+    value = undefined,
+    defaultValue = undefined,
+    label = null,
+    type = "text",
+    status = null,
+    disabled = false,
+    rootClassNames = "",
+    placeholder = "Enter text here",
+    id = "",
+    name = "text-input",
+    onChange = (...args) => {},
+    onPressEnter = (...args) => {},
+    inputHtmlProps = {},
+    inputClassNames = "",
+    size = "default",
+  },
+  ref
+) {
   return (
     <div className={twMerge("text-gray-600", rootClassNames)}>
       {label && (
@@ -80,5 +83,5 @@ let Input = forwardRef(function Input({
       </div>
     </div>
   );
-})
+});
 export { Input };
