@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { SingleSelect } from "./SingleSelect";
+import { breakpoints } from "../hooks/useBreakPoint";
+import { useWindowSize } from "../hooks/useWindowSize";
 
 export function Tabs({
   tabs = [],
@@ -10,8 +12,14 @@ export function Tabs({
   defaultTabClassNames = "",
   contentClassNames = "",
   selectedTabHighlightClasses = (...args) => "bg-primary-highlight",
-  vertical = true,
+  vertical = false,
+  // if disableSingleSelect is true, we will always show tabs, never resort to dropdown
+  // if vertical is true and disableSingleSelect is false, we will show normal tabs on top on <=sm
+  // and vertical tabs above sm
+  disableSingleSelect = false,
 }) {
+  const windowSize = useWindowSize();
+
   const [selectedTab, setSelectedTab] = useState(
     (defaultSelected && tabs.find((tab) => tab.name === defaultSelected)) ||
       selected ||
@@ -31,49 +39,54 @@ export function Tabs({
     <div
       className={twMerge(
         "relative",
-        vertical ? "flex flex-col sm:flex sm:flex-row" : "",
+        vertical && !(disableSingleSelect && windowSize[0] < breakpoints.sm)
+          ? "flex flex-col sm:flex sm:flex-row"
+          : "flex flex-col",
         rootClassNames
       )}
     >
       <div
         className={twMerge(
           "tab-group",
-          vertical
+          vertical && !(disableSingleSelect && windowSize[0] < breakpoints.sm)
             ? "sm:w-10 sm:relative sm:left-0 origin-right z-10"
             : "flex flex-row"
         )}
       >
-        <div className="sm:hidden grow">
-          {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
-          <SingleSelect
-            options={tabs.map((tab) => ({ label: tab.name, value: tab.name }))}
-            placeholder="Select a tab"
-            rootClassNames="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-            value={selectedTab.name}
-            allowCreateNewOption={false}
-            onChange={(val) => {
-              const t = tabs.find((tab) => tab.name === val);
-              if (t) {
-                setSelectedTab(t);
-              }
-            }}
-          />
-          {/* {tabs.map((tab) => (
-              <option
-                key={tab.name}
-                onClick={() => {
-                  setSelectedTab(tab);
-                }}
-              >
-                {tab.name}
-              </option>
-            ))} */}
-        </div>
-        <div className="hidden sm:block grow">
+        {!disableSingleSelect && (
+          <div className={"sm:hidden grow"}>
+            {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
+            <SingleSelect
+              options={tabs.map((tab) => ({
+                label: tab.name,
+                value: tab.name,
+              }))}
+              placeholder="Select a tab"
+              rootClassNames="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              value={selectedTab.name}
+              allowCreateNewOption={false}
+              onChange={(val) => {
+                const t = tabs.find((tab) => tab.name === val);
+                if (t) {
+                  setSelectedTab(t);
+                }
+              }}
+            />
+          </div>
+        )}
+        <div
+          className={twMerge(
+            " grow",
+            disableSingleSelect ? "block" : "hidden sm:block"
+          )}
+        >
           <nav
             className={twMerge(
-              "isolate flex divide-gray-200 rounded-lg shadow cursor-pointer",
-              vertical ? "divide-y flex flex-col" : "divide-x"
+              "isolate flex divide-gray-200 rounded-2xl shadow cursor-pointer",
+              vertical &&
+                !(disableSingleSelect && windowSize[0] < breakpoints.sm)
+                ? "divide-y flex flex-col"
+                : "divide-x"
             )}
             aria-label="Tabs"
           >
@@ -85,17 +98,22 @@ export function Tabs({
                     ? "text-gray-900"
                     : "text-gray-500 hover:text-gray-1000",
                   tabIdx === 0
-                    ? vertical
-                      ? "rounded-tl-lg"
-                      : "rounded-l-lg"
+                    ? vertical &&
+                      !(disableSingleSelect && windowSize[0] < breakpoints.sm)
+                      ? "rounded-tl-2xl"
+                      : "rounded-l-2xl"
                     : "",
                   tabIdx === tabs.length - 1
-                    ? vertical
-                      ? "rounded-bl-lg"
-                      : "rounded-r-lg"
+                    ? vertical &&
+                      !(disableSingleSelect && windowSize[0] < breakpoints.sm)
+                      ? "rounded-bl-2xl"
+                      : "rounded-r-2xl"
                     : "",
                   "group relative min-w-0 overflow-hidden flex-1 bg-white text-center text-sm font-medium hover:bg-gray-50 focus:z-10",
-                  vertical ? "w-10 min-h-28" : "py-4 px-4",
+                  vertical &&
+                    !(disableSingleSelect && windowSize[0] < breakpoints.sm)
+                    ? "w-10 min-h-28"
+                    : "py-4 px-4",
                   tab?.headerClassNames?.(selectedTab.name === tab.name, tab) ||
                     tab?.headerClassNames
                 )}
@@ -108,7 +126,8 @@ export function Tabs({
               >
                 <div
                   className={twMerge(
-                    vertical
+                    vertical &&
+                      !(disableSingleSelect && windowSize[0] < breakpoints.sm)
                       ? "-rotate-90 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
                       : ""
                   )}
@@ -127,7 +146,8 @@ export function Tabs({
                         )
                       : "bg-black/10",
                     "absolute",
-                    vertical
+                    vertical &&
+                      !(disableSingleSelect && windowSize[0] < breakpoints.sm)
                       ? "top-0 right-0 w-0.5 h-full"
                       : "inset-x-0 bottom-0 h-0.5"
                   )}
@@ -140,7 +160,9 @@ export function Tabs({
       <div
         className={twMerge(
           "tab-content relative",
-          vertical ? "pl-0" : "",
+          vertical && !(disableSingleSelect && windowSize[0] < breakpoints.sm)
+            ? "pl-0"
+            : "",
           contentClassNames
         )}
       >
