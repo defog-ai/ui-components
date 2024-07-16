@@ -1,38 +1,64 @@
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { SingleSelect } from "./SingleSelect";
 
 export function Tabs({
   tabs = [],
   defaultSelected = null,
   selected = null,
+  rootClassNames = "",
+  defaultTabClassNames = "",
+  contentClassNames = "",
+  selectedTabHighlightClasses = (...args) => "bg-primary-highlight",
+  vertical = true,
 }) {
   const [selectedTab, setSelectedTab] = useState(
     (defaultSelected && tabs.find((tab) => tab.name === defaultSelected)) ||
-    selected ||
-    tabs[0]
+      selected ||
+      tabs[0]
   );
 
   useEffect(() => {
     if (selected !== selectedTab.name) {
-      setSelectedTab(tabs.find((tab) => tab.name === selected) || tabs[0]);
+      const t = tabs.find((tab) => tab.name === selected);
+      if (t) {
+        setSelectedTab(t);
+      }
     }
   }, [selected]);
 
   return (
-    <>
-      <div className="tab-group mb-5">
-        <div className="sm:hidden">
-          <label htmlFor="tabs" className="sr-only">
-            Select a tab
-          </label>
+    <div
+      className={twMerge(
+        "relative",
+        vertical ? "flex flex-col sm:flex sm:flex-row" : "",
+        rootClassNames
+      )}
+    >
+      <div
+        className={twMerge(
+          "tab-group",
+          vertical
+            ? "sm:w-10 sm:relative sm:left-0 origin-right z-10"
+            : "flex flex-row"
+        )}
+      >
+        <div className="sm:hidden grow">
           {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
-          <select
-            id="tabs"
-            name="tabs"
-            className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
-            defaultValue={defaultSelected}
-          >
-            {tabs.map((tab) => (
+          <SingleSelect
+            options={tabs.map((tab) => ({ label: tab.name, value: tab.name }))}
+            placeholder="Select a tab"
+            rootClassNames="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+            value={selectedTab.name}
+            allowCreateNewOption={false}
+            onChange={(val) => {
+              const t = tabs.find((tab) => tab.name === val);
+              if (t) {
+                setSelectedTab(t);
+              }
+            }}
+          />
+          {/* {tabs.map((tab) => (
               <option
                 key={tab.name}
                 onClick={() => {
@@ -41,12 +67,14 @@ export function Tabs({
               >
                 {tab.name}
               </option>
-            ))}
-          </select>
+            ))} */}
         </div>
-        <div className="hidden sm:block">
+        <div className="hidden sm:block grow">
           <nav
-            className="isolate flex divide-x divide-gray-200 rounded-lg shadow"
+            className={twMerge(
+              "isolate flex divide-gray-200 rounded-lg shadow cursor-pointer",
+              vertical ? "divide-y flex flex-col" : "divide-x"
+            )}
             aria-label="Tabs"
           >
             {tabs.map((tab, tabIdx) => (
@@ -55,10 +83,21 @@ export function Tabs({
                 className={twMerge(
                   selectedTab.name === tab.name
                     ? "text-gray-900"
-                    : "text-gray-500 hover:text-gray-700",
-                  tabIdx === 0 ? "rounded-l-lg" : "",
-                  tabIdx === tabs.length - 1 ? "rounded-r-lg" : "",
-                  "group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10"
+                    : "text-gray-500 hover:text-gray-1000",
+                  tabIdx === 0
+                    ? vertical
+                      ? "rounded-tl-lg"
+                      : "rounded-l-lg"
+                    : "",
+                  tabIdx === tabs.length - 1
+                    ? vertical
+                      ? "rounded-bl-lg"
+                      : "rounded-r-lg"
+                    : "",
+                  "group relative min-w-0 overflow-hidden flex-1 bg-white text-center text-sm font-medium hover:bg-gray-50 focus:z-10",
+                  vertical ? "w-10 min-h-28" : "py-4 px-4",
+                  tab?.headerClassNames?.(selectedTab.name === tab.name, tab) ||
+                    tab?.headerClassNames
                 )}
                 onClick={() => {
                   setSelectedTab(tab);
@@ -67,14 +106,30 @@ export function Tabs({
                   selectedTab.name === tab.name ? "page" : undefined
                 }
               >
-                <span>{tab.name}</span>
+                <div
+                  className={twMerge(
+                    vertical
+                      ? "-rotate-90 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
+                      : ""
+                  )}
+                >
+                  {tab.name}
+                </div>
                 <span
                   aria-hidden="true"
                   className={twMerge(
                     selectedTab.name === tab.name
-                      ? "bg-indigo-500"
-                      : "bg-transparent",
-                    "absolute inset-x-0 bottom-0 h-0.5"
+                      ? twMerge(
+                          "bg-primary-highlight",
+                          typeof selectedTabHighlightClasses === "function"
+                            ? selectedTabHighlightClasses?.(selectedTab.name)
+                            : selectedTabHighlightClasses
+                        )
+                      : "bg-black/10",
+                    "absolute",
+                    vertical
+                      ? "top-0 right-0 w-0.5 h-full"
+                      : "inset-x-0 bottom-0 h-0.5"
                   )}
                 />
               </div>
@@ -82,7 +137,28 @@ export function Tabs({
           </nav>
         </div>
       </div>
-      <div className="tab-content">{selectedTab?.content || <></>}</div>
-    </>
+      <div
+        className={twMerge(
+          "tab-content relative",
+          vertical ? "pl-0" : "",
+          contentClassNames
+        )}
+      >
+        {tabs.map((tab) => (
+          <div
+            key={tab.name}
+            className={twMerge(
+              defaultTabClassNames,
+              selectedTab?.classNames,
+              selectedTab.name === tab.name
+                ? "relative z-10"
+                : "absolute left-0 top-0 z-[-1] pointer-events-none *:pointer-events-none opacity-0"
+            )}
+          >
+            {tab.content}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

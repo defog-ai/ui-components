@@ -39,6 +39,7 @@ const createNewOption = (val) => {
 export function SingleSelect({
   rootClassNames = "",
   popupClassName = "",
+  labelClassNames = "",
   onChange = null,
   defaultValue = undefined,
   value = undefined,
@@ -91,7 +92,10 @@ export function SingleSelect({
     // create a new option and add to internal options
     let opt = internalOptions.find((option) => option.value === value) || null;
 
-    if (
+    // if the opt exists, set it as the selected option
+    if (opt && value !== null && typeof value !== "undefined") {
+      setSelectedOption(opt);
+    } else if (
       !opt &&
       allowCreateNewOption &&
       value !== null &&
@@ -104,7 +108,6 @@ export function SingleSelect({
   }, [value, allowCreateNewOption, internalOptions, selectedOption]);
 
   useEffect(() => {
-    ref?.current?.blur?.();
     // if the selected option doesn't exist
     // in our internal options (this can happen if a newly created option was selected)
     // create a new options and add to internal options
@@ -117,6 +120,7 @@ export function SingleSelect({
       const newOption = createNewOption(selectedOption?.value);
       setInternalOptions([...internalOptions, newOption]);
     }
+    ref?.current?.blur?.();
   }, [selectedOption, internalOptions, allowCreateNewOption]);
 
   return (
@@ -124,6 +128,7 @@ export function SingleSelect({
       as="div"
       by="value"
       className={rootClassNames}
+      immediate={true}
       value={selectedOption}
       defaultValue={defaultValue}
       disabled={disabled}
@@ -137,7 +142,12 @@ export function SingleSelect({
       }}
     >
       {label && (
-        <label className="block text-xs mb-2 font-light text-gray-600">
+        <label
+          className={twMerge(
+            "block text-xs mb-2 font-light text-gray-600",
+            labelClassNames
+          )}
+        >
           {label}
         </label>
       )}

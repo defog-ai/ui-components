@@ -10,12 +10,15 @@ export function DropFiles({
   onDragEnter = (...args) => {},
   rootClassNames = "",
   iconClassNames = "",
+  contentClassNames = "",
+  labelClassNames = "",
   children = null,
   icon = null,
+  disabled = false,
 }) {
   return (
     <div
-      className={twMerge("relative text-gray-600 text-center", rootClassNames)}
+      className={twMerge("relative text-gray-600", rootClassNames)}
       onDrop={(e) => onDrop(e)}
       onDragEnter={(e) => {
         e.preventDefault();
@@ -28,12 +31,17 @@ export function DropFiles({
       }}
     >
       {label && (
-        <label className="block text-xs mb-2 font-light text-gray-600">
+        <label
+          className={twMerge(
+            "block text-xs mb-2 font-light text-gray-600",
+            labelClassNames
+          )}
+        >
           {label}
         </label>
       )}
-      {children}
-      <div className="flex flex-col items-center justify-center">
+      <div className={contentClassNames}>
+        {children}
         {icon || (
           <ArrowDownTrayIcon className={twMerge("h-6 w-6", iconClassNames)} />
         )}
@@ -46,8 +54,10 @@ export function DropFiles({
             accept="text/csv"
             className="w-full h-full z-[1] opacity-0 absolute left-0 top-0"
             type="file"
+            disabled={disabled}
             onInput={(e) => {
               e.preventDefault();
+              if (disabled) return;
               onFileSelect(e);
             }}
           ></input>
