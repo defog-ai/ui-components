@@ -85,7 +85,7 @@ export function MessageManager() {
   };
 }
 
-export const MessageManagerContext = createContext(null);
+export const MessageManagerContext = createContext(MessageManager());
 
 const icons = {
   success: <CheckCircleIcon className="text-lime-500 w-4 h-4" />,
