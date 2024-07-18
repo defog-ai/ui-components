@@ -49,7 +49,7 @@ export function Tabs({
         className={twMerge(
           "tab-group",
           vertical && !(disableSingleSelect && windowSize[0] < breakpoints.sm)
-            ? "sm:w-10 sm:relative sm:left-0 origin-right z-10"
+            ? " sm:relative sm:left-0 origin-right z-10"
             : "flex flex-row"
         )}
       >
@@ -112,7 +112,7 @@ export function Tabs({
                   "group relative min-w-0 overflow-hidden flex-1 bg-white text-center text-sm font-medium hover:bg-gray-50 focus:z-10",
                   vertical &&
                     !(disableSingleSelect && windowSize[0] < breakpoints.sm)
-                    ? "w-10 min-h-28"
+                    ? "px-2 flex items-center min-h-28"
                     : "py-4 px-4",
                   tab?.headerClassNames?.(selectedTab.name === tab.name, tab) ||
                     tab?.headerClassNames
@@ -125,12 +125,18 @@ export function Tabs({
                 }
               >
                 <div
-                  className={twMerge(
-                    vertical &&
+                  style={{
+                    writingMode:
+                      vertical &&
                       !(disableSingleSelect && windowSize[0] < breakpoints.sm)
-                      ? "-rotate-90 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
-                      : ""
-                  )}
+                        ? "tb-rl"
+                        : "",
+                    transform:
+                      vertical &&
+                      !(disableSingleSelect && windowSize[0] < breakpoints.sm)
+                        ? "rotate(-180deg)"
+                        : "",
+                  }}
                 >
                   {tab.name}
                 </div>

@@ -1,5 +1,5 @@
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 let TextArea = forwardRef(function TextArea(
@@ -22,8 +22,19 @@ let TextArea = forwardRef(function TextArea(
   },
   ref
 ) {
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    if (autoResize && rootRef?.current) {
+      const textArea = rootRef.current.querySelector("textarea");
+      if (!textArea) return;
+
+      textArea.style.height = "auto";
+      textArea.style.height = textArea.scrollHeight + "px";
+    }
+  });
   return (
-    <div className={twMerge("text-gray-600", rootClassNames)}>
+    <div className={twMerge("text-gray-600", rootClassNames)} ref={rootRef}>
       {label && (
         <label htmlFor={name} className="block text-xs mb-2 font-light">
           {label}
@@ -50,6 +61,12 @@ let TextArea = forwardRef(function TextArea(
                 : "bg-white",
               textAreaClassNames
             )}
+            onFocus={(ev) => {
+              if (autoResize) {
+                ev.target.style.height = "auto";
+                ev.target.style.height = ev.target.scrollHeight + "px";
+              }
+            }}
             onChange={(ev) => {
               if (autoResize) {
                 ev.target.style.height = "auto";
