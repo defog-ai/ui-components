@@ -140,6 +140,10 @@ export function Table({
     })
   );
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [rows, columns]);
+
   const dataIndexes = columnsToDisplay.map((d) => d.dataIndex);
   const dataIndexToColumnMap = columnsToDisplay.reduce((acc, column) => {
     acc[column.dataIndex] = column;

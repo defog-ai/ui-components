@@ -214,16 +214,14 @@ export function MultiSelect({
                 <div
                   className="ml-2 w-4 rounded-r-md hover:bg-gray-400 hover:text-white h-full flex items-center justify-center cursor-pointer"
                   onClick={() => {
-                    setSelectedOptions(
-                      selectedOptions.filter(
-                        (selectedOption) => selectedOption.value !== opt.value
-                      )
+                    const newSel = selectedOptions.filter(
+                      (selectedOption) => selectedOption.value !== opt.value
                     );
+                    setSelectedOptions(newSel);
                     if (onChange && typeof onChange === "function") {
                       onChange(
-                        selectedOptions.filter(
-                          (selectedOption) => selectedOption.value !== opt.value
-                        )
+                        newSel.map((d) => d.value),
+                        newSel
                       );
                     }
                   }}
