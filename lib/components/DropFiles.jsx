@@ -13,20 +13,32 @@ export function DropFiles({
   contentClassNames = "",
   labelClassNames = "",
   children = null,
-  icon = null,
+  showIcon = null,
   disabled = false,
 }) {
   return (
     <div
       className={twMerge("relative text-gray-600", rootClassNames)}
-      onDrop={(e) => onDrop(e)}
+      onDrop={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (disabled) return;
+
+        onDrop(e);
+      }}
       onDragEnter={(e) => {
         e.preventDefault();
+        e.stopPropagation();
+        if (disabled) return;
+
         onDragEnter(e);
       }}
       onDragOver={(e) => {
         // Prevent default behavior (Prevent file from being opened)
         e.preventDefault();
+        e.stopPropagation();
+        if (disabled) return;
+
         onDragOver(e);
       }}
     >
@@ -42,17 +54,17 @@ export function DropFiles({
       )}
       <div className={contentClassNames}>
         {children}
-        {icon || (
+        {showIcon && (
           <ArrowDownTrayIcon className={twMerge("h-6 w-6", iconClassNames)} />
         )}
-        <div className="mt-2 relative group">
-          <p className="text-xs text-gray-400 group-hover:underline z-[2] relative pointer-events-none">
+        <div className="mt-2 relative group cursor-pointer">
+          <p className="cursor-pointer text-xs text-gray-400 group-hover:underline z-[2] relative pointer-events-none">
             Select from your computer
           </p>
           <input
             aria-label=""
             accept="text/csv"
-            className="w-full h-full z-[1] opacity-0 absolute left-0 top-0"
+            className="cursor-pointer w-full h-full z-[1] opacity-0 absolute left-0 top-0"
             type="file"
             disabled={disabled}
             onInput={(e) => {
