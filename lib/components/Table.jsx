@@ -96,6 +96,7 @@ const defaultSorter = (a, b) => {
  * columns: { dataIndex: string, title: string, key: string, sorter?: (a: any, b: any) => number, columnHeaderCellRender?: (args: { column: any, i: number, allColumns: any[], toggleSort: (newColumn: any, newOrder: string) => void, sortOrder: string, sortColumn: any }) => JSX.Element }[],
  * rows: any[],
  * rootClassNames?: string,
+ * pagerClassNames?: string,
  * paginationPosition?: "top" | "bottom",
  * pagination?: { defaultPageSize: number, showSizeChanger: boolean },
  * skipColumns?: string[],
@@ -108,6 +109,7 @@ export function Table({
   columns,
   rows,
   rootClassNames = "",
+  pagerClassNames = "",
   paginationPosition = "bottom",
   pagination = { defaultPageSize: 10, showSizeChanger: true },
   skipColumns = [],
@@ -174,7 +176,12 @@ export function Table({
 
   const pager = useMemo(
     () => (
-      <div className="pl-4 pager text-center bg-white">
+      <div
+        className={twMerge(
+          "pl-4 text-sm pager text-center bg-white",
+          pagerClassNames
+        )}
+      >
         <div className="w-full flex flex-row justify-end items-center">
           <div className="flex flex-row w-50 items-center">
             <div className="text-gray-600">

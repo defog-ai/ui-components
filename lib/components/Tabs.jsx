@@ -94,6 +94,7 @@ export function Tabs({
               <div
                 key={tab.name}
                 className={twMerge(
+                  "flex items-center justify-center",
                   selectedTab.name === tab.name
                     ? "text-gray-900"
                     : "text-gray-500 hover:text-gray-1000",
@@ -112,7 +113,7 @@ export function Tabs({
                   "group relative min-w-0 overflow-hidden flex-1 bg-white text-center text-sm font-medium hover:bg-gray-50 focus:z-10",
                   vertical &&
                     !(disableSingleSelect && windowSize[0] < breakpoints.sm)
-                    ? "px-2 flex items-center min-h-28"
+                    ? "px-2 py-4 min-h-28 max-h-32"
                     : "py-4 px-4",
                   tab?.headerClassNames?.(selectedTab.name === tab.name, tab) ||
                     tab?.headerClassNames
