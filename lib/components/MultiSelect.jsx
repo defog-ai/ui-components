@@ -52,6 +52,11 @@ export function MultiSelect({
   size = "default",
   allowClear = true,
   allowCreateNewOption = true,
+  // if this is true, then the multi select will act as a "filter"
+  // If the user has no options selected, we set *all* the options as selected
+  // but if the user selected any option, only those options will be selected
+  // basically there will be no situation where the selectedOptions is empty
+  actAsFilter = false,
 }) {
   const [query, setQuery] = useState("");
   const ref = useRef(null);
@@ -148,14 +153,13 @@ export function MultiSelect({
     });
   }, [selectedOptions, internalOptions, allowCreateNewOption]);
 
-  console.log(selectedOptions);
-
   return (
     <Combobox
       as="div"
       by="value"
       multiple
-      className={rootClassNames}
+      immediate
+      className={twMerge("max-w-96", rootClassNames)}
       value={selectedOptions}
       defaultValue={defaultValue}
       disabled={disabled}
@@ -164,7 +168,10 @@ export function MultiSelect({
         setSelectedOptions(newSelectedOptions);
 
         if (newSelectedOptions && onChange && typeof onChange === "function") {
-          onChange(newSelectedOptions);
+          onChange(
+            newSelectedOptions.map((d) => d.value),
+            newSelectedOptions
+          );
         }
       }}
     >
@@ -177,11 +184,24 @@ export function MultiSelect({
       <div className="relative">
         <div
           className={twMerge(
-            "max-w-96 flex flex-row flex-wrap gap-2 items-start w-full rounded-md border-0 pr-12 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-400 sm:text-sm sm:leading-6",
+            "flex flex-row flex-wrap gap-2 items-start w-full rounded-md border-0 pr-12 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-400 sm:text-sm sm:leading-6",
             inputSizeClasses[size] || inputSizeClasses["default"],
             disabled ? "bg-gray-100 text-gray-400" : "bg-white text-gray-900"
           )}
         >
+          <ComboboxInput
+            ref={ref}
+            className={
+              "py-1 grow h-full rounded-md border-0 pr-12 ring-0 focus:ring-0 sm:text-sm sm:leading-6"
+            }
+            placeholder={placeholder}
+            onChange={(event) => {
+              setQuery(event.target.value);
+            }}
+            onBlur={() => {
+              setQuery("");
+            }}
+          />
           {selectedOptions.map((opt, i) => {
             return tagRenderer ? (
               tagRenderer(opt)
@@ -213,19 +233,6 @@ export function MultiSelect({
               </div>
             );
           })}
-          <ComboboxInput
-            ref={ref}
-            className={
-              "py-1 grow h-full rounded-md border-0 pr-12 ring-0 focus:ring-0 sm:text-sm sm:leading-6"
-            }
-            placeholder={placeholder}
-            onChange={(event) => {
-              setQuery(event.target.value);
-            }}
-            onBlur={() => {
-              setQuery("");
-            }}
-          />
         </div>
 
         <ComboboxButton className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
