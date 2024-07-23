@@ -33,7 +33,12 @@ const createNewOption = (val) => {
   return {
     label: val,
     value: isNumber(val) ? +val : val,
+    rawValue: val,
   };
+};
+
+const matchingValue = (option, value) => {
+  return option.value === value || option.rawValue === value;
 };
 
 export function SingleSelect({
@@ -54,7 +59,13 @@ export function SingleSelect({
 }) {
   const [query, setQuery] = useState("");
   const ref = useRef(null);
-  const [internalOptions, setInternalOptions] = useState(options);
+  const [internalOptions, setInternalOptions] = useState(
+    options.map((d) => ({
+      value: isNumber(d.value) ? +d.value : d.value,
+      label: d.label,
+      rawValue: d.value,
+    }))
+  );
 
   const filteredOptions =
     query === ""
@@ -79,21 +90,29 @@ export function SingleSelect({
     filteredOptions.push({
       label: query,
       value: isNumber(query) ? +query : query,
+      rawValue: query,
     });
   }
 
   // find the option matching the default value
   const [selectedOption, setSelectedOption] = useState(
-    internalOptions.find((option) => option.value === defaultValue) || null
+    internalOptions.find((option) => matchingValue(option, defaultValue)) ||
+      null
   );
 
   useEffect(() => {
     // if the option in the value doesn't exist,
     // create a new option and add to internal options
-    let opt = internalOptions.find((option) => option.value === value) || null;
+    let opt =
+      internalOptions.find((option) => matchingValue(option, value)) || null;
 
     // if the opt exists, set it as the selected option
-    if (opt && value !== null && typeof value !== "undefined") {
+    if (
+      opt &&
+      value !== null &&
+      typeof value !== "undefined" &&
+      opt.value !== selectedOption?.value
+    ) {
       setSelectedOption(opt);
     } else if (
       !opt &&

@@ -1,6 +1,7 @@
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
+  InformationCircleIcon,
   XCircleIcon,
 } from "@heroicons/react/20/solid";
 import { createContext, useContext, useSyncExternalStore } from "react";
@@ -19,7 +20,7 @@ export function MessageManager() {
   };
 
   function addMessage(type, message) {
-    const time = new Date().getTime();
+    const time = performance.now();
     const id = v4();
 
     list = [
@@ -51,6 +52,11 @@ export function MessageManager() {
     emitChange();
   }
 
+  function info(message) {
+    addMessage("info", message);
+    emitChange();
+  }
+
   function clear() {
     list = [];
   }
@@ -75,6 +81,7 @@ export function MessageManager() {
     success,
     error,
     warning,
+    info,
     subscribe,
     getList,
     clear,
@@ -91,6 +98,7 @@ const icons = {
   success: <CheckCircleIcon className="text-lime-500 w-4 h-4" />,
   warning: <ExclamationCircleIcon className="text-yellow-400 w-4 h-4" />,
   error: <XCircleIcon className="text-rose-500 w-4 h-4" />,
+  info: <InformationCircleIcon className="text-blue-500 w-4 h-4" />,
 };
 
 export function MessageMonitor({ disabled = false, rootClassNames = "" }) {
@@ -118,7 +126,8 @@ export function MessageMonitor({ disabled = false, rootClassNames = "" }) {
                 `my-2 flex flex-row gap-2 items-center max-w-[80%] p-2 shadow-md bg-white text-gray-800 mx-auto rounded-lg max-w-10/12 border animate-fade-in-down`,
                 message.type === "success" && "border-lime-500",
                 message.type === "warning" && "border-yellow-400",
-                message.type === "error" && "border-rose-500"
+                message.type === "error" && "border-rose-500",
+                message.type === "info" && "border-blue-500"
               )}
             >
               <span>{icons[message.type]}</span>
