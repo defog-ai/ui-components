@@ -15,19 +15,33 @@ export function DropFilesHeadless({
     <div className={rootClassNames}>
       <div
         className="relative cursor-pointer"
-        onDrop={(e) => onDrop(e)}
+        onDrop={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (disabled) return;
+
+          onDrop(e);
+        }}
         onDragLeave={(e) => {
           e.preventDefault();
           e.stopPropagation();
+          if (disabled) return;
+
           onDragLeave(e);
         }}
         onDragEnter={(e) => {
           e.preventDefault();
+          e.stopPropagation();
+          if (disabled) return;
+
           onDragEnter(e);
         }}
         onDragOver={(e) => {
           // Prevent default behavior (Prevent file from being opened)
           e.preventDefault();
+          e.stopPropagation();
+          if (disabled) return;
+
           onDragOver(e);
         }}
       >
@@ -38,9 +52,13 @@ export function DropFilesHeadless({
           type="file"
           disabled={disabled}
           onInput={(e) => {
+            console.log(e);
             e.preventDefault();
             if (disabled) return;
+
             onFileSelect(e);
+            // set value to null jic user wants to upload the same file again
+            e.target.value = null;
           }}
         ></input>
         {children}

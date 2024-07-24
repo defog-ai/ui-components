@@ -71,6 +71,9 @@ export function DropFiles({
               e.preventDefault();
               if (disabled) return;
               onFileSelect(e);
+
+              // set value to null jic user wants to upload the same file again
+              e.target.value = null;
             }}
           ></input>
         </div>
