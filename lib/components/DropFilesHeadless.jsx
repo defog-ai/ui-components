@@ -52,7 +52,6 @@ export function DropFilesHeadless({
           type="file"
           disabled={disabled}
           onInput={(e) => {
-            console.log(e);
             e.preventDefault();
             if (disabled) return;
 
