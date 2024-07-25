@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { SingleSelect } from "./SingleSelect";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import { MessageManagerContext } from "./Message";
 
 const allowedPageSizes = [5, 10, 20, 50, 100];
 
@@ -116,6 +117,7 @@ export function Table({
   rowCellRender = (_) => null,
   columnHeaderClassNames = "",
 }) {
+  const messageManager = useContext(MessageManagerContext);
   // name of the property in the rows objects where each column's data is stored
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(pagination.defaultPageSize);
@@ -142,6 +144,14 @@ export function Table({
 
   useEffect(() => {
     setCurrentPage(1);
+    // if multiple columns have same dataIndex, show a warning that output might be confusing
+    const dataIndexes = columns.map((d) => d.dataIndex);
+    const uniqueDataIndexes = new Set(dataIndexes);
+    if (dataIndexes.length !== uniqueDataIndexes.size) {
+      messageManager.warning(
+        "There seem to be duplicate columns. Table shown might be garbled."
+      );
+    }
   }, [rows, columns]);
 
   const dataIndexes = columnsToDisplay.map((d) => d.dataIndex);
