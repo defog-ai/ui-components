@@ -18,6 +18,11 @@ const App = () => {
 
 # DEVELOPING
 
+Notes:
+
+1. Use jsdoc style tags for documenting your comopnents. Look inside `lib/components/Button.jsx` for a simple example. Look inside `lib/components/Message.jsx` or `lib/components/Table.jsx` for a more complex example.
+2. Just fyi: This uses typescript to build types for easier coding in vscode. **You don't have to write typescript. The above jsdoc comments will also do the trick.** You won't have to worry about it as it's already included in the build command.
+
 ### Developing this library on its own
 
 All component source files live inside `lib/`.

@@ -1,10 +1,14 @@
 import React from "react";
 
 /**
+ * @typedef {Object} PopoverProps
+ * @property {React.ReactNode} children - This is the element that will trigger the popover when hovered.
+ * @property {React.ReactNode} content - The content of the popover panel.
+ */
+
+/**
  * "On hover" Popover component.
- * @param {Object} props
- * @param {React.ReactNode} props.children - This is the element that will trigger the popover when hovered.
- * @param {React.ReactNode} props.content - The content of the popover panel.
+ * @param {PopoverProps} props
  *
  * @example
  * // Shows a popover with the content "Popover content" when the button is hovered.

@@ -4,20 +4,25 @@ import { twMerge } from "tailwind-merge";
 
 /**
  * A simple toggle component.
- * @param {Object} props
- * @param {React.ReactNode} [props.title=null] - The title of the toggle.
- * @param {React.ReactNode} [props.onLabel=null] - The label when the toggle is on.
- * @param {React.ReactNode} [props.offLabel=null] - The label when the toggle is off.
- * @param {boolean} [props.defaultOn=false] - The default state of the toggle.
- * @param {string} [props.titleClassNames=""] - Additional classes to be added to the title.
- * @param {string} [props.onClassNames=""] - Additional classes to be added to the on state.
- * @param {string} [props.offClassNames=""] - Additional classes to be added to the off state.
- * @param {string} [props.toggleClassNames=""] - Additional classes to be added to the toggle.
- * @param {string} [props.rootClassNames=""] - Additional classes to be added to the root div.
- * @param {string} [props.labelClasses=""] - Additional classes to be added to the label.
- * @param {boolean} [props.disabled=false] - If true, the toggle will be disabled.
- * @param {function} [props.onToggle=() => {}] - Function to be called when the toggle is toggled.
+ * @typedef {Object} ToggleProps
+ * @property {React.ReactNode} [title=null] - The title of the toggle.
+ * @property {React.ReactNode} [onLabel=null] - The label when the toggle is on.
+ * @property {React.ReactNode} [offLabel=null] - The label when the toggle is off.
+ * @property {boolean} [defaultOn=false] - The default state of the toggle.
+ * @property {string} [titleClassNames=""] - Additional classes to be added to the title.
+ * @property {string} [onClassNames=""] - Additional classes to be added to the on state.
+ * @property {string} [offClassNames=""] - Additional classes to be added to the off state.
+ * @property {string} [toggleClassNames=""] - Additional classes to be added to the toggle.
+ * @property {string} [rootClassNames=""] - Additional classes to be added to the root div.
+ * @property {string} [labelClasses=""] - Additional classes to be added to the label.
+ * @property {boolean} [disabled=false] - If true, the toggle will be disabled.
+ * @property {function} [onToggle=() => {}] - Function to be called when the toggle is toggled.
  */
+
+/**
+ * A simple toggle component.
+ * @param {ToggleProps} props
+ * */
 export function Toggle({
   title = null,
   onLabel = null,

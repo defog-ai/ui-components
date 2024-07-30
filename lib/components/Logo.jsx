@@ -1,10 +1,14 @@
 import React from "react";
 
 /**
+ * @typedef {Object} LogoProps
+ * @property {string} [classNames] - Additional classes to be added to the root div.
+ * @property {boolean} [showWords] - If true, the words "Defog" will be shown.
+ */
+
+/**
  * Defog logo component.
- * @param {Object} props
- * @param {string} [props.classNames] - Additional classes to be added to the root div.
- * @param {boolean} [props.showWords] - If true, the words "Defog" will be shown.
+ * @param {LogoProps}
  */
 export const Logo = ({ classNames = "", showWords = true }) => (
   <svg

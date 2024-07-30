@@ -151,12 +151,15 @@ const icons = {
 };
 
 /**
- * Provides a message monitor for the MessageManager. This subscribes to the message manager and displays the messages. By default, renders in a fixed div at the top of the screen.
- *
- * @param {Object} props
- * @param {boolean} [props.disabled] - If true, the message monitor will be disabled. Messages will still be pushed to message manager, but nothign will be displayed by this component.
- * @param {string} [props.rootClassNames] - Additional classes to be added to the root div. For example, You can choose to make this an absolute div at the bottom/top of a relative container if you want to keep the messages "contained" within the portion of the screen your container is in.
+ * @typedef {Object} MessageMonitorProps
+ * @property {boolean} [disabled=false] - If true, the message monitor will be disabled. Messages will still be pushed to message manager, but nothign will be displayed by this component.
+ * @property {string} [rootClassNames] - Additional classes to be added to the root div. For example, You can choose to make this an absolute div at the bottom/top of a relative container if you want to keep the messages "contained" within the portion of the screen your container is in.
  */
+
+/**
+ * Provides a message monitor for the MessageManager. This subscribes to the message manager and displays the messages. By default, renders in a fixed div at the top of the screen.
+ * @param {MessageMonitorProps} props
+ * */
 export function MessageMonitor({ disabled = false, rootClassNames = "" }) {
   const messageManager = useContext(MessageManagerContext);
 

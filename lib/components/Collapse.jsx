@@ -7,16 +7,21 @@ let timeout,
 
 /**
  * Collapse component
- * @param {Object} props
- * @param {React.ReactNode} props.children - The content of the collapse.
- * @param {string} props.title - The title of the collapse.
- * @param {boolean} [props.defaultCollapsed] - If true, the collapse will be collapsed by default.
- * @param {boolean} [props.collapsed] - If true, the collapse will be collapsed.
- * @param {boolean} [props.alwaysOpen] - If true, the collapse will always be open.
- * @param {string} [props.rootClassNames] - Additional classes to be added to the root div.
- * @param {string} [props.headerClassNames] - Additional classes to be added to the header div.
- * @param {string} [props.iconClassNames] - Additional classes to be added to the icon.
- * @param {string} [props.titleClassNames] - Additional classes to be added to the title.
+ * @typedef {Object} CollapseProps
+ * @property {React.ReactNode} children - The content of the collapse.
+ * @property {string} title - The title of the collapse.
+ * @property {boolean} [defaultCollapsed] - If true, the collapse will be collapsed by default.
+ * @property {boolean} [collapsed] - If true, the collapse will be collapsed.
+ * @property {boolean} [alwaysOpen] - If true, the collapse will always be open.
+ * @property {string} [rootClassNames] - Additional classes to be added to the root div.
+ * @property {string} [headerClassNames] - Additional classes to be added to the header div.
+ * @property {string} [iconClassNames] - Additional classes to be added to the icon.
+ * @property {string} [titleClassNames] - Additional classes to be added to the title.
+ */
+
+/**
+ * Collapse component
+ * @param {CollapseProps} props
  */
 export function Collapse({
   children,
