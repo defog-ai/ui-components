@@ -5,6 +5,8 @@ import { libInjectCss } from "vite-plugin-lib-inject-css";
 import { resolve } from "path";
 import tailwindcss from "tailwindcss";
 
+console.log([...Object.keys(peerDependencies), ...Object.keys(dependencies)]);
+
 export default defineConfig({
   css: {
     postcss: {
@@ -22,20 +24,23 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     manifest: true,
-  },
-  rollupOptions: {
-    // make sure to externalize deps that shouldn't be bundled
-    // into your library
-    external: [...Object.keys(peerDependencies), ...Object.keys(dependencies)],
-    target: "esnext",
-    sourcemap: true,
-    output: {
-      // Provide global variables to use in the UMD build
-      // for externalized deps
-      globals: {
-        moment: "moment",
-        uuid: "uuid",
-        react: "react",
+    rollupOptions: {
+      // make sure to externalize deps that shouldn't be bundled
+      // into your library
+      external: [
+        ...Object.keys(peerDependencies),
+        ...Object.keys(dependencies),
+      ],
+      target: "esnext",
+      sourcemap: true,
+      output: {
+        // Provide global variables to use in the UMD build
+        // for externalized deps
+        globals: {
+          moment: "moment",
+          uuid: "uuid",
+          react: "react",
+        },
       },
     },
   },

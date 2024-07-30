@@ -1,11 +1,11 @@
-import { TextArea } from '../lib/main'
+import { Input } from "../lib/main";
 
 function App() {
   return (
     <>
-      <TextArea />
+      <Input type="number" />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
