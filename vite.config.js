@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { peerDependencies, dependencies } from "./package.json";
-import { libInjectCss } from "vite-plugin-lib-inject-css";
+// import { libInjectCss } from "vite-plugin-lib-inject-css";
 import { resolve } from "path";
 import tailwindcss from "tailwindcss";
 
@@ -11,15 +11,18 @@ export default defineConfig({
       plugins: [tailwindcss],
     },
   },
-  plugins: [react(), libInjectCss()],
+  corePlugins: {
+    preflight: false,
+  },
+  plugins: [react()],
   build: {
+    sourcemap: "inline",
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, "lib/main.js"),
-      name: "UIComponents",
       // the proper extensions will be added
       fileName: "ui-components",
-      formats: ["es", "cjs"],
+      formats: ["es"],
     },
     manifest: true,
     rollupOptions: {
@@ -31,15 +34,6 @@ export default defineConfig({
       ],
       target: "esnext",
       sourcemap: true,
-      output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
-        globals: {
-          moment: "moment",
-          uuid: "uuid",
-          react: "react",
-        },
-      },
     },
   },
 });

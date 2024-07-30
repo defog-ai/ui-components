@@ -7,7 +7,9 @@ export default {
     "./lib/**/*.{js,ts,jsx,tsx,mdx}",
     "./test/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  important: true,
+  corePlugins: {
+    preflight: false,
+  },
   theme: {
     extend: {
       colors: {
