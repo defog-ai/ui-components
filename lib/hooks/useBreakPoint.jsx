@@ -9,6 +9,18 @@ export const breakpoints = {
   xl: 1280,
 };
 
+/**
+ * A hook that returns the current breakpoint.
+ * @returns {string} The current breakpoint.
+ *
+ * @example
+ * // Logs the current breakpoint.
+ * function MyComponent() {
+ *   const breakpoint = useBreakPoint();
+ *   console.log(breakpoint);
+ *   return <div>Current breakpoint: {breakpoint}</div>;
+ * }
+ */
 export function useBreakPoint() {
   const [breakpoint, setBreakpoint] = useState("lg");
   const [width] = useWindowSize();

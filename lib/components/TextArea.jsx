@@ -2,6 +2,30 @@ import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { forwardRef, useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
+/**
+ * @typedef {Object} TextAreaProps
+ * @property {string} [value] - The value of the textarea. Setting this converts this to a controlled component.
+ * @property {string} [defaultValue] - Default initial value of the textarea.
+ * @property {string} [status] - The status of the textarea. Can be "error". If "error" is set, the textarea will have a red border.
+ * @property {string} [label] - Label for the textarea.
+ * @property {boolean} [disabled] - If true, the textarea will be disabled.
+ * @property {number} [defaultRows] - Default number of rows for the textarea.
+ * @property {string} [rootClassNames] - Additional classes to be added to the root div.
+ * @property {string} [textAreaClassNames] - Additional classes to be added to the textarea element.
+ * @property {string} [placeholder] - Placeholder text for the textarea.
+ * @property {string} [id] - Id of the textarea.
+ * @property {string} [name] - Name of the textarea.
+ * @property {function} [onChange] - Function to be called when the textarea value changes.
+ * @property {function} [onKeyDown] - Function to be called when a key is pressed down.
+ * @property {object} [textAreaHtmlProps] - Additional props to be added to the textarea element.
+ * @property {boolean} [autoResize] - If true, the textarea will resize automatically based on the content.
+ * @property {React.Ref<HTMLTextAreaElement>} [ref] - Forwarded Ref to the textarea element.
+ */
+
+/**
+ * @type {React.FC<TextAreaProps>}
+ * TextArea component
+ * */
 let TextArea = forwardRef(function TextArea(
   {
     value = undefined,

@@ -6,6 +6,22 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
+/**
+ * Sidebar component that can be toggled open and closed.
+ * @param {Object} props
+ * @param {React.ReactNode} [props.title="Menu"] - The title of the sidebar.
+ * @param {React.ReactNode} props.children - The content of the sidebar.
+ * @param {string} [props.rootClassNames=""] - Additional classes to be added to the root div.
+ * @param {string} [props.contentClassNames=""] - Additional classes to be added to the content div.
+ * @param {string} [props.openClassNames=""] - Additional classes to be added to the root div when the sidebar is open.
+ * @param {string} [props.closedClassNames=""] - Additional classes to be added to the root div when the sidebar is closed.
+ * @param {string} [props.iconClassNames=""] - Additional classes to be added to the icon button.
+ * @param {number} [props.iconSize=4] - The size of the icon button. Only works for tailwind's sizing classes.
+ * @param {string} [props.location="left"] - The location of the sidebar.
+ * @param {boolean} [props.open=null] - If true, the sidebar will be open.
+ * @param {boolean} [props.disableClose=false] - If true, the sidebar will not be able to be closed.
+ * @param {function} [props.onChange=() => {}] - Function to be called when the sidebar is toggled.
+ */
 export function Sidebar({
   title = "Menu",
   children,

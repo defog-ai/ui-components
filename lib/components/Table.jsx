@@ -17,7 +17,7 @@ const defaultColumnHeaderRender = ({
 }) => {
   return (
     <th
-      key={column.key}
+      key={column.dataIndex}
       scope="col"
       className={twMerge(
         i === 0 ? "pl-4" : "px-3",
@@ -92,18 +92,21 @@ const defaultSorter = (a, b) => {
 };
 
 /**
- * @Component Table
- * @param {{
- * columns: { dataIndex: string, title: string, key: string, sorter?: (a: any, b: any) => number, columnHeaderCellRender?: (args: { column: any, i: number, allColumns: any[], toggleSort: (newColumn: any, newOrder: string) => void, sortOrder: string, sortColumn: any }) => JSX.Element }[],
- * rows: any[],
- * rootClassNames?: string,
- * pagerClassNames?: string,
- * paginationPosition?: "top" | "bottom",
- * pagination?: { defaultPageSize: number, showSizeChanger: boolean },
- * skipColumns?: string[],
- * rowCellRender?: (cellMetadata: { cellValue: any, colIdx: number, row: any, dataIndex: string, column: any, dataIndexes: string[], allColumns: any[], dataIndexToColumnMap: { [key: string]: any } }) => JSX.Element
- * columnHeaderClassNames?: string
- * }}  props Props for the component
+ * Table component
+ * @param {Object} props
+ * @param {Array<{ dataIndex: string, title: string, sorter?: (a: any, b: any) => number, columnHeaderCellRender?: (args: { column: any, i: number, allColumns: any[], toggleSort: (newColumn: any, newOrder: string) => void, sortOrder: string, sortColumn: any }) => JSX.Element }[]} props.columns - The columns to be displayed in the table.
+ * - `dataIndex` is the key in the row object where the data is stored.
+ * - `title` is the title of the column.
+ * - `sorter` is the function to be used for sorting the column.
+ * - `columnHeaderCellRender` is the function to be used for rendering the column header. If this function returns a falsy value, the default renderer is used. So this can also be used for conditional rendering of column headers.
+ * @param {Array<any>} props.rows - The rows to be displayed in the table.
+ * @param {string} [props.rootClassNames=""] - Additional classes to be added to the root div.
+ * @param {string} [props.pagerClassNames=""] - Additional classes to be added to the pager.
+ * @param {"top" | "bottom"} [props.paginationPosition="bottom"] - The position of the pagination.
+ * @param {{ defaultPageSize: number, showSizeChanger: boolean }} [props.pagination={ defaultPageSize: 10, showSizeChanger: true }] - The pagination options.
+ * @param {string[]} [props.skipColumns=[]] - The columns to skip.
+ * @param {(cellMetadata: { cellValue: any, colIdx: number, row: any, dataIndex: string, column: any, dataIndexes: string[], allColumns: any[], dataIndexToColumnMap: { [key: string]: any } }) => JSX.Element} [props.rowCellRender=(_) => null] - The row cell render function. If this function returns a falsy value, the default renderer is used. So this can also be used for conditional rendering of row cells.
+ * @param {string} [props.columnHeaderClassNames=""] - Additional classes to be added to the column header.
  * @returns {JSX.Element}
  */
 export function Table({

@@ -2,6 +2,22 @@ import { useState } from "react";
 import { Field, Label, Switch } from "@headlessui/react";
 import { twMerge } from "tailwind-merge";
 
+/**
+ * A simple toggle component.
+ * @param {Object} props
+ * @param {React.ReactNode} [props.title=null] - The title of the toggle.
+ * @param {React.ReactNode} [props.onLabel=null] - The label when the toggle is on.
+ * @param {React.ReactNode} [props.offLabel=null] - The label when the toggle is off.
+ * @param {boolean} [props.defaultOn=false] - The default state of the toggle.
+ * @param {string} [props.titleClassNames=""] - Additional classes to be added to the title.
+ * @param {string} [props.onClassNames=""] - Additional classes to be added to the on state.
+ * @param {string} [props.offClassNames=""] - Additional classes to be added to the off state.
+ * @param {string} [props.toggleClassNames=""] - Additional classes to be added to the toggle.
+ * @param {string} [props.rootClassNames=""] - Additional classes to be added to the root div.
+ * @param {string} [props.labelClasses=""] - Additional classes to be added to the label.
+ * @param {boolean} [props.disabled=false] - If true, the toggle will be disabled.
+ * @param {function} [props.onToggle=() => {}] - Function to be called when the toggle is toggled.
+ */
 export function Toggle({
   title = null,
   onLabel = null,
@@ -14,7 +30,7 @@ export function Toggle({
   rootClassNames = "",
   labelClasses = "",
   disabled = false,
-  onToggle = (...args) => { },
+  onToggle = (...args) => {},
 }) {
   const [on, setOn] = useState(defaultOn);
 

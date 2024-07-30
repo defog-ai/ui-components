@@ -1,10 +1,19 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-// a button component with onclick, className and children props
+/**
+ * Button component
+ *
+ * @param {Object} props
+ * @param {string} props.id - Id of the button.
+ * @param {function} props.onClick - Function to be called when the button is clicked.
+ * @param {string} props.className - Additional classes to be added to the button.
+ * @param {React.ReactNode} props.children - The content of the button.
+ * @param {boolean} props.disabled - If true, the button will be disabled.
+ */
 export function Button({
   id = null,
-  onClick = (...args) => { },
+  onClick = (...args) => {},
   className = "",
   children = null,
   disabled = false,

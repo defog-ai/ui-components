@@ -4,6 +4,20 @@ import { twMerge } from "tailwind-merge";
 
 let timeout,
   count = 0;
+
+/**
+ * Collapse component
+ * @param {Object} props
+ * @param {React.ReactNode} props.children - The content of the collapse.
+ * @param {string} props.title - The title of the collapse.
+ * @param {boolean} [props.defaultCollapsed] - If true, the collapse will be collapsed by default.
+ * @param {boolean} [props.collapsed] - If true, the collapse will be collapsed.
+ * @param {boolean} [props.alwaysOpen] - If true, the collapse will always be open.
+ * @param {string} [props.rootClassNames] - Additional classes to be added to the root div.
+ * @param {string} [props.headerClassNames] - Additional classes to be added to the header div.
+ * @param {string} [props.iconClassNames] - Additional classes to be added to the icon.
+ * @param {string} [props.titleClassNames] - Additional classes to be added to the title.
+ */
 export function Collapse({
   children,
   title,

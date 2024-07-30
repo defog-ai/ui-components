@@ -1,13 +1,12 @@
-const plugin = require("tailwindcss/plugin");
+import plugin from "tailwindcss/plugin";
+import forms from "@tailwindcss/forms";
 
-module.exports = {
+export default {
   content: [
+    "./index.html",
     "./lib/**/*.{js,ts,jsx,tsx,mdx}",
     "./test/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  corePlugins: {
-    preflight: false,
-  },
   important: true,
   theme: {
     extend: {
@@ -114,7 +113,7 @@ module.exports = {
   },
 
   plugins: [
-    require("@tailwindcss/forms"),
+    forms,
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".writing-vertical": {

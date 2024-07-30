@@ -1,5 +1,10 @@
 import { twMerge } from "tailwind-merge";
 
+/**
+ * Simple spinning loader component.
+ * @param {Object} props
+ * @param {string} [props.classNames=""] - Additional classes to be added to the root div.
+ */
 export function SpinningLoader({ classNames = "" }) {
   return (
     <svg

@@ -1,8 +1,8 @@
 {
-  "name": "ui-components",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@defogdotai/ui-components",
+  "version": "0.0.0-beta.2",
   "type": "module",
+  "author": "support@defog.ai",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -17,17 +17,20 @@
       "require": "./dist/ui-components.umd.cjs"
     }
   },
-  "dependencies": {
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "d3-array": "^3.2.4",
     "tailwind-merge": "^2.4.0",
     "uuid": "^10.0.0"
   },
-  "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
+  "dependencies": {},
+  "license": "MIT",
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
     "@types/react": "^18.3.3",
@@ -41,8 +44,6 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "sass": "^1.77.7",
     "tailwindcss": "^3.4.4",
     "vite": "^5.3.1",
