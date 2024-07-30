@@ -2,6 +2,22 @@ import React from "react";
 import { ArrowDownTrayIcon } from "@heroicons/react/20/solid";
 import { twMerge } from "tailwind-merge";
 
+/**
+ * File dropping component with a UI. If you want something headless, use the DropFilesHeadless component which gives a minimal UI.
+ * @param {Object} props
+ * @param {string} [props.label] - Label for the dropzone.
+ * @param {function} [props.onDrop] - Function to be called when files are dropped.
+ * @param {function} [props.onFileSelect] - Function to be called when a file is selected.
+ * @param {function} [props.onDragOver] - Function to be called when a file is dragged over the dropzone.
+ * @param {function} [props.onDragEnter] - Function to be called when a file is dragged over the dropzone.
+ * @param {string} [props.rootClassNames] - Additional classes to be added to the root div.
+ * @param {string} [props.iconClassNames] - Additional classes to be added to the icon.
+ * @param {string} [props.contentClassNames] - Additional classes to be added to the content div.
+ * @param {string} [props.labelClassNames] - Additional classes to be added to the label div.
+ * @param {React.ReactNode} [props.children] - The content of the dropzone.
+ * @param {boolean} [props.showIcon] - If true, the drop icon will be shown.
+ * @param {boolean} [props.disabled] - If true, the dropzone will be disabled.
+ */
 export function DropFiles({
   label = "Drop files here",
   onDrop = (...args) => {},

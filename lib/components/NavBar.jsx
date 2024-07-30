@@ -19,6 +19,12 @@ import { Logo } from "./Logo";
 //   { name: 'Calendar', href: '#', current: false },
 // ]
 
+/**
+ * Simple Navbar component
+ * @param {Object} props
+ * @param {Array<{title: string, href: string, current: boolean, onClick: function}>} [props.items] - The items to be displayed in the navbar.
+ * @param {string} [props.rootClassNames] - Additional classes to be added to the root div.
+ */
 export function NavBar({ items = [], rootClassNames = "" }) {
   return (
     <Disclosure as="nav" className={twMerge("bg-white shadow", rootClassNames)}>

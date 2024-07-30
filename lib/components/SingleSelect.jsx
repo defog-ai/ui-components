@@ -41,6 +41,24 @@ const matchingValue = (option, value) => {
   return option.value === value || option.rawValue === value;
 };
 
+/**
+ * A single select component.
+ * @param {Object} props
+ * @param {string} [props.rootClassNames=""] - Additional classes to be added to the root div.
+ * @param {string} [props.popupClassName=""] - Additional classes to be added to the popup.
+ * @param {string} [props.labelClassNames=""] - Additional classes to be added to the label.
+ * @param {function} [props.onChange=null] - Function to be called when the value changes.
+ * @param {any} [props.defaultValue=undefined] - The default value of the select.
+ * @param {any} [props.value=undefined] - The value of the select.
+ * @param {boolean} [props.disabled=false] - If true, the select will be disabled.
+ * @param {Array<{label: string, value: any}>} [props.options=[]] - The options of the select.
+ * @param {string} [props.label=null] - The label of the select.
+ * @param {function} [props.optionRenderer=null] - Function to render the options.
+ * @param {string} [props.placeholder="Select an option"] - The placeholder of the select.
+ * @param {string} [props.size="default"] - The size of the select. Can be "default" or "small".
+ * @param {boolean} [props.allowClear=true] - If true, the select will have a clear button.
+ * @param {boolean} [props.allowCreateNewOption=true] - If true, the select will allow creating new options.
+ * */
 export function SingleSelect({
   rootClassNames = "",
   popupClassName = "",

@@ -4,16 +4,33 @@ import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { Button } from "./Button";
 
+/**
+ * A modal component.
+ * @param {Object} props
+ * @param {React.ReactNode} [props.children] - The content of the modal.
+ * @param {boolean} [props.open] - If true, the modal will be open.
+ * @param {function} [props.onCancel] - Function to be called when the modal is closed.
+ * @param {boolean} [props.footer] - If true, the modal will have a footer.
+ * @param {React.ReactNode} [props.title] - The title of the modal.
+ * @param {React.ReactNode} [props.closeIcon] - The close icon of the modal.
+ * @param {function} [props.onOk] - Function to be called when the ok button is clicked.
+ * @param {boolean} [props.okLoading] - If true, the ok button will be loading.
+ * @param {string} [props.okText] - The text of the ok button.
+ * @param {boolean} [props.maskClosable] - NOT IMPLEMENTED YET. If true, the modal will be closed when the mask is clicked.
+ * @param {string} [props.rootClassNames] - Additional classes to be added to the root div.
+ * @param {string} [props.className] - Additional classes to be added to the modal.
+ * @param {string} [props.contentClassNames] - Additional classes to be added to the content div.
+ */
 export function Modal({
   children = null,
   open = false,
-  onCancel = () => { },
+  onCancel = () => {},
   footer = true,
   title = null,
   closeIcon = (
     <XCircleIcon className="w-6 h-6 text-gray-300 hover:text-gray-600" />
   ),
-  onOk = () => { },
+  onOk = () => {},
   okLoading = false,
   okText = "Ok",
   maskClosable = true,

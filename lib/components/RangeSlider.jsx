@@ -4,10 +4,11 @@ import { twMerge } from "tailwind-merge";
 import { range, bisectCenter } from "d3-array";
 const d3Range = range;
 
+/** # DO NOT USE. CURRENTLY BROKEN. */
 export function RangeSlider({
   step = 1,
   range = [0, 10],
-  onChange = (...args) => { },
+  onChange = (...args) => {},
   rootClassNames = "",
   vertical = false,
   trackClassNames = "",
@@ -78,13 +79,13 @@ export function RangeSlider({
 
     return vertical
       ? {
-        height: Math.abs(maxTop - minTop) * 100 + "%",
-        top: minTop * 100 + "%",
-      }
+          height: Math.abs(maxTop - minTop) * 100 + "%",
+          top: minTop * 100 + "%",
+        }
       : {
-        width: Math.abs(maxLeft - minLeft) * 100 + "%",
-        left: minLeft * 100 + "%",
-      };
+          width: Math.abs(maxLeft - minLeft) * 100 + "%",
+          left: minLeft * 100 + "%",
+        };
   }, [sliders, vertical]);
 
   return (
@@ -179,8 +180,8 @@ export function RangeSlider({
               vertical
                 ? { top: sliders[0].top * 100 + "%" }
                 : {
-                  left: sliders[0].left * 100 + "%",
-                }
+                    left: sliders[0].left * 100 + "%",
+                  }
             }
             onDrag={(e) => {
               if (!ctr.current || !e.clientX || !e.clientY) return;
@@ -256,8 +257,8 @@ export function RangeSlider({
               vertical
                 ? { top: sliders[1].top * 100 + "%" }
                 : {
-                  left: sliders[1].left * 100 + "%",
-                }
+                    left: sliders[1].left * 100 + "%",
+                  }
             }
             onDrag={(e) => {
               if (!ctr.current || !e.clientX || !e.clientY) return;

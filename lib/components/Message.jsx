@@ -8,6 +8,45 @@ import { createContext, useContext, useSyncExternalStore } from "react";
 import { twMerge } from "tailwind-merge";
 import { v4 } from "uuid";
 
+/**
+ * Provides a message manager with success, error, warning, and info messages.
+ * Allows subscribing to messages and getting a list of messages.
+ *
+ * **Usually used with the MessageMonitor and MessageContext components.**
+ *
+ * @returns {{
+ * success: function,
+ * error: function,
+ * warning: function,
+ * info: function,
+ * subscribe: function,
+ * getList: function,
+ * clear: function,
+ * getServerSnapshot: function
+ * }}
+ *
+ * @example
+ * // Usage with context:
+ * const messageManager = MessageManager();
+ * <MessageManagerContext.Provider value={messageManager}>
+ *   <MessageMonitor />
+ *    <App />
+ * </MessageManagerContext.Provider>
+ *
+ *
+ * @example
+ * // Core class usage
+ * const messageManager = MessageManager();
+ * messageManager.success("Success message");
+ * messageManager.error("Error message");
+ * messageManager.warning("Warning message");
+ *
+ * messageManager.subscribe(() => {
+ *  console.log(messageManager.getList());
+ * });
+ *
+ * messageManager.clear();
+ * */
 export function MessageManager() {
   let list = [];
   let listeners = [];
@@ -92,6 +131,16 @@ export function MessageManager() {
   };
 }
 
+/**
+ * Context for the MessageManager.
+ *
+ * @example
+ * const messageManager = MessageManager();
+ * <MessageManagerContext.Provider value={messageManager}>
+ *  <MessageMonitor />
+ *   <App />
+ * </MessageManagerContext.Provider>
+ * */
 export const MessageManagerContext = createContext(MessageManager());
 
 const icons = {
@@ -101,6 +150,13 @@ const icons = {
   info: <InformationCircleIcon className="text-blue-500 w-4 h-4" />,
 };
 
+/**
+ * Provides a message monitor for the MessageManager. This subscribes to the message manager and displays the messages. By default, renders in a fixed div at the top of the screen.
+ *
+ * @param {Object} props
+ * @param {boolean} [props.disabled] - If true, the message monitor will be disabled. Messages will still be pushed to message manager, but nothign will be displayed by this component.
+ * @param {string} [props.rootClassNames] - Additional classes to be added to the root div. For example, You can choose to make this an absolute div at the bottom/top of a relative container if you want to keep the messages "contained" within the portion of the screen your container is in.
+ */
 export function MessageMonitor({ disabled = false, rootClassNames = "" }) {
   const messageManager = useContext(MessageManagerContext);
 

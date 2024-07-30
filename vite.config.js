@@ -5,8 +5,6 @@ import { libInjectCss } from "vite-plugin-lib-inject-css";
 import { resolve } from "path";
 import tailwindcss from "tailwindcss";
 
-console.log([...Object.keys(peerDependencies), ...Object.keys(dependencies)]);
-
 export default defineConfig({
   css: {
     postcss: {

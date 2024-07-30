@@ -4,6 +4,37 @@ import { SingleSelect } from "./SingleSelect";
 import { breakpoints } from "../hooks/useBreakPoint";
 import { useWindowSize } from "../hooks/useWindowSize";
 
+/**
+ * @typedef {{name: string, content?: [string], classNames?: string, headerClassNames?: string}} Tab
+ * @property {string} name - The name of the tab.
+ * @property {React.ReactNode} content - The content of the tab.
+ * @property {string} [classNames] - Additional classes to be added to the tab content.
+ * @property {function} [headerClassNames] - Additional classes to be added to the tab header.
+ *
+ * @typedef {Object} TabsProps
+ * @property {Array<Tab>} [tabs] - The tabs to be displayed.
+ * @property {string} [defaultSelected] - The default selected tab.
+ * @property {string} [selected] - The selected tab.
+ * @property {string} [rootClassNames] - Additional classes to be added to the root div.
+ * @property {string} [defaultTabClassNames] - Additional classes to be added to all tabs.
+ * @property {string} [contentClassNames] - Additional classes to be added to the tab content.
+ * @property {function|string} [selectedTabHeaderClasses] - Additional classes to be added to the selected tab's header. Can be a string or a function that takes the selected tab name as an argument.
+ * @property {boolean} [vertical] - If true, the tabs will be displayed vertically. If disableSingleSelect is false, changes to a horizontal single select on the phone. Otherwise, goes to horizontal tabs.
+ * @property {boolean} [disableSingleSelect] - If disableSingleSelect is true, we will always show tabs, and never resort to a dropdown. If vertical is true and disableSingleSelect is false, we will show normal tabs on top on <=sm and vertical tabs above sm
+ */
+
+/**
+ * Tabs component
+ * @param {TabsProps} props - The props for the component
+ * @example
+ * const tabs = [
+ *   { name: 'Normal tab', content: <div>Content 3</div>},
+ *   { name: 'Red background in tab content', content: <div>Content 1</div>, classNames: "bg-red-500" },
+ *   { name: 'Blue header tab', content: <div>Content 2</div>, headerClassNames: "bg-blue-500" },
+ * ];
+ *
+ * <Tabs tabs={tabs} defaultSelected="Normal tab" />
+ * */
 export function Tabs({
   tabs = [],
   defaultSelected = null,
@@ -11,11 +42,8 @@ export function Tabs({
   rootClassNames = "",
   defaultTabClassNames = "",
   contentClassNames = "",
-  selectedTabHighlightClasses = (...args) => "bg-primary-highlight",
+  selectedTabHeaderClasses = (...args) => "bg-primary-highlight",
   vertical = false,
-  // if disableSingleSelect is true, we will always show tabs, never resort to dropdown
-  // if vertical is true and disableSingleSelect is false, we will show normal tabs on top on <=sm
-  // and vertical tabs above sm
   disableSingleSelect = false,
 }) {
   const windowSize = useWindowSize();
@@ -147,9 +175,9 @@ export function Tabs({
                     selectedTab.name === tab.name
                       ? twMerge(
                           "bg-primary-highlight",
-                          typeof selectedTabHighlightClasses === "function"
-                            ? selectedTabHighlightClasses?.(selectedTab.name)
-                            : selectedTabHighlightClasses
+                          typeof selectedTabHeaderClasses === "function"
+                            ? selectedTabHeaderClasses?.(selectedTab.name)
+                            : selectedTabHeaderClasses
                         )
                       : "bg-black/10",
                     "absolute",
