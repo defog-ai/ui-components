@@ -18,12 +18,15 @@ import { Logo } from "./Logo";
 //   { name: 'Projects', href: '#', current: false },
 //   { name: 'Calendar', href: '#', current: false },
 // ]
+/**
+ * @typedef {Object} NavBarProps
+ * @property {Array<{title: string, href: string, current: boolean, onClick: function}>} [items] - The items to be displayed in the navbar.
+ * @property {string} [rootClassNames] - Additional classes to be added to the root div.
+ */
 
 /**
  * Simple Navbar component
- * @param {Object} props
- * @param {Array<{title: string, href: string, current: boolean, onClick: function}>} [props.items] - The items to be displayed in the navbar.
- * @param {string} [props.rootClassNames] - Additional classes to be added to the root div.
+ * @param {NavBarProps} props
  */
 export function NavBar({ items = [], rootClassNames = "" }) {
   return (

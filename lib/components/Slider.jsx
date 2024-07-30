@@ -5,16 +5,21 @@ import { twMerge } from "tailwind-merge";
 
 /**
  * Simple slider component.
- * @param {Object} props
- * @param {number} [props.min=0] - The minimum value of the slider.
- * @param {number} [props.max=10] - The maximum value of the slider.
- * @param {number} [props.step=1] - # NOT IMPLEMENTED.
+ * @typedef {Object} SliderProps
+ * @property {number} [min=0] - The minimum value of the slider.
+ * @property {number} [max=10] - The maximum value of the slider.
+ * @property {number} [step=1] - # NOT IMPLEMENTED.
  * The step of the slider.
- * @param {number} [props.defaultValue=undefined] - The default value of the slider.
- * @param {number} [props.value=undefined] - The value of the slider. This makes the slider controllable.
- * @param {function} [props.onChange=() => {}] - Function to be called when the slider value changes.
- * @param {string} [props.rootClassNames=""] - Additional classes to be added to the root div.
- * @param {Object} [props.sliderHtmlProps] - Additional props to be added to the input element.
+ * @property {number} [defaultValue=undefined] - The default value of the slider.
+ * @property {number} [value=undefined] - The value of the slider. This makes the slider controllable.
+ * @property {function} [onChange=() => {}] - Function to be called when the slider value changes.
+ * @property {string} [rootClassNames=""] - Additional classes to be added to the root div.
+ * @property {Object} [sliderHtmlProps] - Additional props to be added to the input element.
+ */
+
+/**
+ * Simple slider component.
+ * @param {SliderProps} props
  */
 export function Slider({
   min = 0,

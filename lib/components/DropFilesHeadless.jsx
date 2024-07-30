@@ -1,16 +1,21 @@
 import React from "react";
 
-/** A component that gives file dropping functionality with bare bones UI.
- * @param {Object} props
- * @param {React.ReactNode} props.children - The content of the dropzone.
- * @param {boolean} [props.disabled] - If true, the dropzone will be disabled.
- * @param {function} [props.onDrop] - Function to be called when files are dropped.
- * @param {function} [props.onFileSelect] - Function to be called when a file is selected.
- * @param {function} [props.onDragOver] - Function to be called when a file is dragged over the dropzone.
- * @param {function} [props.onDragEnter] - Function to be called when a file is dragged over the dropzone.
- * @param {function} [props.onDragLeave] - Function to be called when a file is dragged over the dropzone.
- * @param {string} [props.rootClassNames] - Additional classes to be added to the root div.
+/**
+ * @typedef {Object} Props
+ * @property {React.ReactNode} children - The content of the dropzone.
+ * @property {boolean} [disabled] - If true, the dropzone will be disabled.
+ * @property {function} [onDrop] - Function to be called when files are dropped.
+ * @property {function} [onFileSelect] - Function to be called when a file is selected.
+ * @property {function} [onDragOver] - Function to be called when a file is dragged over the dropzone.
+ * @property {function} [onDragEnter] - Function to be called when a file is dragged over the dropzone.
+ * @property {function} [onDragLeave] - Function to be called when a file is dragged over the dropzone.
+ * @property {string} [rootClassNames] - Additional classes to be added to the root div.
  */
+
+/**
+ * A component that gives file dropping functionality with bare bones UI.
+ * @param {Props} props
+ * */
 export function DropFilesHeadless({
   children,
   disabled = false,

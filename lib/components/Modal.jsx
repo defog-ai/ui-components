@@ -6,20 +6,25 @@ import { Button } from "./Button";
 
 /**
  * A modal component.
- * @param {Object} props
- * @param {React.ReactNode} [props.children] - The content of the modal.
- * @param {boolean} [props.open] - If true, the modal will be open.
- * @param {function} [props.onCancel] - Function to be called when the modal is closed.
- * @param {boolean} [props.footer] - If true, the modal will have a footer.
- * @param {React.ReactNode} [props.title] - The title of the modal.
- * @param {React.ReactNode} [props.closeIcon] - The close icon of the modal.
- * @param {function} [props.onOk] - Function to be called when the ok button is clicked.
- * @param {boolean} [props.okLoading] - If true, the ok button will be loading.
- * @param {string} [props.okText] - The text of the ok button.
- * @param {boolean} [props.maskClosable] - NOT IMPLEMENTED YET. If true, the modal will be closed when the mask is clicked.
- * @param {string} [props.rootClassNames] - Additional classes to be added to the root div.
- * @param {string} [props.className] - Additional classes to be added to the modal.
- * @param {string} [props.contentClassNames] - Additional classes to be added to the content div.
+ * @typedef {Object} ModalProps
+ * @property {React.ReactNode} [children] - The content of the modal.
+ * @property {boolean} [open] - If true, the modal will be open.
+ * @property {function} [onCancel] - Function to be called when the modal is closed.
+ * @property {boolean} [footer] - If true, the modal will have a footer.
+ * @property {React.ReactNode} [title] - The title of the modal.
+ * @property {React.ReactNode} [closeIcon] - The close icon of the modal.
+ * @property {function} [onOk] - Function to be called when the ok button is clicked.
+ * @property {boolean} [okLoading] - If true, the ok button will be loading.
+ * @property {string} [okText] - The text of the ok button.
+ * @property {boolean} [maskClosable] - NOT IMPLEMENTED YET. If true, the modal will be closed when the mask is clicked.
+ * @property {string} [rootClassNames] - Additional classes to be added to the root div.
+ * @property {string} [className] - Additional classes to be added to the modal.
+ * @property {string} [contentClassNames] - Additional classes to be added to the content div.
+ */
+
+/**
+ * Modal component
+ * @param {ModalProps} props
  */
 export function Modal({
   children = null,

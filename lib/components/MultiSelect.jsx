@@ -38,25 +38,27 @@ const createNewOption = (val) => {
 };
 
 /**
- * MultiSelect component
- * @param {Object} props
- * @param {string} [props.rootClassNames] - Additional classes to be added to the root div.
- * @param {string} [props.popupClassName] - Additional classes to be added to the popup.
- * @param {function} [props.onChange] - Function to be called when the option is changed.
- * @param {Array<{label: string, value: string}>} [props.defaultValue] - The default value of the multi select.
- * @param {Array<{label: string, value: string}>} [props.value] - The value of the multi select.
- * @param {boolean} [props.disabled] - If true, the multi select will be disabled.
- * @param {Array<{label: string, value: string}>} [props.options] - The options to be displayed.
- * @param {string} [props.label] - The label of the multi select.
- * @param {function} [props.optionRenderer] - Function to render the option.
- * @param {function} [props.tagRenderer] - Function to render the tag.
- * @param {string} [props.placeholder] - The placeholder of the multi select.
- * @param {string} [props.size] - The size of the multi select. Can be "default" or "small".
- * @param {boolean} [props.allowClear] - If true, the multi select will have a clear button.
- * @param {boolean} [props.allowCreateNewOption] - If true, the multi select will allow creating new options.
- * @param {boolean} [props.actAsFilter] - If true, the multi select will act as a filter.
- * @returns {React.ReactNode}
+ * @typedef {Object} MultiSelectProps
+ * @property {string} [rootClassNames] - Additional classes to be added to the root div.
+ * @property {string} [popupClassName] - Additional classes to be added to the popup.
+ * @property {function} [onChange] - Function to be called when the option is changed.
+ * @property {Array<{label: string, value: string}>} [defaultValue] - The default value of the multi select.
+ * @property {Array<{label: string, value: string}>} [value] - The value of the multi select.
+ * @property {boolean} [disabled] - If true, the multi select will be disabled.
+ * @property {Array<{label: string, value: string}>} [options] - The options to be displayed.
+ * @property {string} [label] - The label of the multi select.
+ * @property {function} [optionRenderer] - Function to render the option.
+ * @property {function} [tagRenderer] - Function to render the tag.
+ * @property {string} [placeholder] - The placeholder of the multi select.
+ * @property {string} [size] - The size of the multi select. Can be "default" or "small".
+ * @property {boolean} [allowClear] - If true, the multi select will have a clear button.
+ * @property {boolean} [allowCreateNewOption] - If true, the multi select will allow creating new options.
  */
+
+/**
+ * MultiSelect component
+ * @param {MultiSelectProps} props
+ * */
 export function MultiSelect({
   rootClassNames = "",
   popupClassName = "",
