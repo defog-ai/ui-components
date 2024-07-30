@@ -65,7 +65,7 @@ npm link react
 npm link react-dom
 ```
 
-This means that all the references to react and `react-dom` inside this repo will now point to the react and `react-dom` libraries inside your _main project_.
+This means that all the references to `react` and `react-dom` inside this repo will now point to the react and `react-dom` libraries inside your _main project_.
 
 3. Then, similar to the above, we will make this library available to your main project:
 
@@ -85,7 +85,7 @@ npm link @defogdotai/ui-components
 
 ## Why do we do the linking business?
 
-If we let this repo use its own `react` and `react-dom` and not the one in the main project, we will have two instances of react and `react-dom` in the final build. This will lead to a lot of issues. The major issue is in using the exported hooks of this library. [Documented here in more detail by the react docs.](https://legacy.reactjs.org/warnings/invalid-hook-call-warning.html)
+If we let this repo use its own `react` and `react-dom` and not the one in the main project, we will have two instances of `react` and `react-dom` in the main project. This seems to cause to a lot of issues, the major one being usage of the exported hooks of this library. [Documented here in more detail by the react docs.](https://legacy.reactjs.org/warnings/invalid-hook-call-warning.html)
 
 # Notes about building CSS files:
 
