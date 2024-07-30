@@ -16,7 +16,7 @@ const App = () => {
 };
 ```
 
-# DEVELOPING
+## Developing
 
 Notes:
 
@@ -36,8 +36,6 @@ Test locally using the following commands in project root:
 Now you can go into `test/main.jsx` to see your components! Any changes you make to your code inside `lib/` will be reflected immediately.
 
 When done, you can run: `npm run build` to build the library.
-
-To publish the library
 
 ### Developing this library, _while using this library in another project_
 
@@ -86,6 +84,15 @@ npm link @defogdotai/ui-components
 ## Why do we do the linking business?
 
 If we let this repo use its own `react` and `react-dom` and not the one in the main project, we will have two instances of `react` and `react-dom` in the main project. This seems to cause to a lot of issues, the major one being usage of the exported hooks of this library. [Documented here in more detail by the react docs.](https://legacy.reactjs.org/warnings/invalid-hook-call-warning.html)
+
+# Publishing
+
+To publish the library, bump the version in `package.json` and run `npm publish`.
+
+If you want to publish a beta version:
+
+1. Add a tag to the version number. For example, `1.0.0-beta.1`.
+2. Run `npm publish --tag beta`.
 
 # Notes about building CSS files:
 
