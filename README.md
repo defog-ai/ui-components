@@ -1,3 +1,5 @@
+# :warning: :warning:	 Archived. Merged with [agents-ui-components](https://github.com/defog-ai/agents-ui-components) :warning: :warning:
+
 # Defog's UI components
 
 ### Using this library
